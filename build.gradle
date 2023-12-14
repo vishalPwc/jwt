@@ -1,0 +1,33 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.13'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.jwt.token'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'com.google.auth:google-auth-library-oauth2-http:1.19.0'
+  	implementation 'com.auth0:java-jwt:3.19.1'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+bootBuildImage{  
+  imageName = "jwt-token:now"
+  bindings = [
+    "${project.rootDir}/bindings:/platform/bindings"
+  ]
+}
